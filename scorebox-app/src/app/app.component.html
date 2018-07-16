@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+<body>
+
+<div id="main-container">
+
+	<div id="matchs-container">
+		<table id="matchs-container-table" class="table scorebox">
+			<tr rowspan="2">
+				<th class="team-red" colspan="2">{{team_red_name}}</th><th class="team-red">{{giveGlobalScore("red")}}</th>
+				<th class="team-blue">{{giveGlobalScore("blue")}}</th><th class="team-blue"  colspan="2">{{team_blue_name}}</th>
+			</tr>
+			
+	    	<tr *ngFor="let red of team_red; let i = index" [attr.data-index]="i">
+	    		<td class="team-red" colspan="2">{{team_red[i].name}}</td><td class="team-red">{{team_red[i].score}}</td>
+	    		<td class="team-blue">{{team_blue[i].score}}</td><td class="team-blue" colspan="2">{{team_blue[i].name}}</td>
+	    	</tr>
+
+		</table>
+	</div>
+	<div id="match-editor" *ngIf="inEdition">
+		<select class='select-option' required [(ngModel)]='optionSelected' (ngModelChange)='onOptionSelected($event)'>
+	    	<option class='option' *ngFor='let option of options' [value]="option">{{option}}</option>
+		</select>
+
+		 <input #box
+      (keyup.enter)="updateRed(box.value)">
+      <input #box2
+      (keyup.enter)="updateBlue(box2.value)">
+
+	</div>
+	
+
+</div>
+
+
+</body>
+</html>
+
